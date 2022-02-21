@@ -1,6 +1,6 @@
 [package]
 name = "deindentor"
-version = "1.0.1"
+version = "1.0.2"
 edition = "2021"
 authors = ["yaxley-peaks <epiclycoolgaemer@gmail.com>"]
 license = "MIT OR Apache-2.0"
