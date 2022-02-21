@@ -1,7 +1,13 @@
 # Reverses the indentation on your file
 
 ## Usage
- ```deindentor <INPUT-FILE> <OUTPUT-FILE>```
+1. Install with cargo.
+
+```cargo install deindentor```
+
+2. Use it.
+
+```deindentor <INPUT-FILE> <OUTPUT-FILE>```
 
 ## Example
 #### Before:
