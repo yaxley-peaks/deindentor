@@ -2,6 +2,7 @@ use std::fs::File;
 use std::io::Write;
 use std::fs;
 use clap::Parser;
+use std::io::BufWriter;
 struct Line {
     indent: usize,
     line: String,
@@ -34,8 +35,11 @@ fn find_max_indent(lines: &str) -> usize {
     indents.into_iter().max().unwrap()
 }
 fn spaces(number: usize) -> String {
-    let x = [' '; 100];
-    x.iter().take(number).collect()
+    let mut space = String::new();
+    for _ in 0..number {
+        space.push(' ');
+    }
+    space
 }
 fn generate_indents(lines: &str) -> Vec<Line> {
     let mut kv: Vec<Line> = Vec::new();
@@ -59,7 +63,20 @@ fn generate_result(lines: &str) -> String {
 }
 fn main() {
     let args = CLI::parse();
-    let file = fs::read_to_string(&args.input).unwrap();
-    let mut outfile = File::create(&args.output).unwrap();
-    writeln!(&mut outfile,"{}", generate_result(&file)).unwrap();
+    let file = match fs::read_to_string(&args.input) {
+        Ok(file) => file,
+        Err(e) => {
+            println!("Input: Error: {}", e);
+            return;
+        }
+    };  
+    let outfile = match File::create(&args.output) {
+        Ok(file) => file,
+        Err(e) => {
+            println!("Output: Error: {}", e);
+            return;
+        }
+    }; 
+    let mut writer = BufWriter::new(outfile);
+    writeln!(&mut writer,"{}", generate_result(&file)).unwrap();
 }
