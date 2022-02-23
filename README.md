@@ -1,3 +1,6 @@
+![Crates.io](https://img.shields.io/crates/v/deindentor)
+![Crates.io](https://img.shields.io/crates/d/deindentor)
+![Rust](https://github.com/yaxley-peaks/deindentor/actions/workflows/rust.yml/badge.svg)
 # Reverses the indentation on your file
 
 ## Usage
