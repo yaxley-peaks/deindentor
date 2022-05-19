@@ -6,11 +6,15 @@
 ## Usage
 1. Install with cargo.
 
-```cargo install deindentor```
+```console
+cargo install deindentor
+```
 
 2. Use it.
 
-```deindentor <INPUT-FILE> <OUTPUT-FILE>```
+```console
+deindentor <INPUT-FILE> <OUTPUT-FILE>
+```
 
 ## Example
 #### Before:

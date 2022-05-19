@@ -66,14 +66,14 @@ fn main() {
     let file = match fs::read_to_string(&args.input) {
         Ok(file) => file,
         Err(e) => {
-            println!("Input: Error: {}", e);
+            eprintln!("Input: Error: {}", e);
             return;
         }
     };  
     let outfile = match File::create(&args.output) {
         Ok(file) => file,
         Err(e) => {
-            println!("Output: Error: {}", e);
+            eprintln!("Output: Error: {}", e);
             return;
         }
     }; 
