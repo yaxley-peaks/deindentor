@@ -1,14 +1,14 @@
-use std::fs::File;
-use std::io::Write;
-use std::fs;
 use clap::Parser;
+use std::fs;
+use std::fs::File;
 use std::io::BufWriter;
+use std::io::Write;
 struct Line {
     indent: usize,
     line: String,
 }
 
-#[derive(Parser,Debug)]
+#[derive(Parser, Debug)]
 struct CLI {
     #[clap(parse(from_os_str))]
     input: std::path::PathBuf,
@@ -35,11 +35,7 @@ fn find_max_indent(lines: &str) -> usize {
     indents.into_iter().max().unwrap()
 }
 fn spaces(number: usize) -> String {
-    let mut space = String::new();
-    for _ in 0..number {
-        space.push(' ');
-    }
-    space
+    " ".chars().cycle().take(number).collect()
 }
 fn generate_indents(lines: &str) -> Vec<Line> {
     let mut kv: Vec<Line> = Vec::new();
@@ -69,14 +65,14 @@ fn main() {
             eprintln!("Input: Error: {}", e);
             return;
         }
-    };  
+    };
     let outfile = match File::create(&args.output) {
         Ok(file) => file,
         Err(e) => {
             eprintln!("Output: Error: {}", e);
             return;
         }
-    }; 
+    };
     let mut writer = BufWriter::new(outfile);
-    writeln!(&mut writer,"{}", generate_result(&file)).unwrap();
+    writeln!(&mut writer, "{}", generate_result(&file)).unwrap();
 }
