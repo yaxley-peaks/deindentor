@@ -28,6 +28,10 @@ fn determine_indent(string: &str) -> usize {
     spaces
 }
 
+fn determine_indent_decl(string: &str) -> usize {
+    string.chars().take_while(|x| {*x == ' '}).count()
+}
+
 fn find_max_indent(lines: &str) -> usize {
     let mut indents: Vec<usize> = Vec::new();
     for line in lines.split('\n') {
