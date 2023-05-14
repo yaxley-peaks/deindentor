@@ -37,11 +37,11 @@ fn generate_indents(lines: &str) -> Vec<Line> {
     kv
 }
 pub fn generate_result(lines: &str) -> String {
-    let max_indent = find_max_indent(&lines);
-    let indents = generate_indents(&lines);
+    let max_indent = find_max_indent(lines);
+    let indents = generate_indents(lines);
     let mut res = Vec::new();
     for item in indents {
-        res.push(String::from(spaces(max_indent - item.indent) + &item.line));
+        res.push(spaces(max_indent - item.indent) + &item.line);
         res.push("\n".to_string());
     }
     res.into_iter().collect()
