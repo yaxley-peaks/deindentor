@@ -1,10 +1,9 @@
-
+use clap::Parser;
+use deindentor::*;
 use std::fs;
 use std::fs::File;
 use std::io::BufWriter;
 use std::io::Write;
-use clap::Parser;
-use deindentor::*;
 
 fn main() {
     let args = CLI::parse();
