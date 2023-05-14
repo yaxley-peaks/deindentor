@@ -1,4 +1,3 @@
-
 use clap::Parser;
 struct Line {
     indent: usize,
@@ -13,28 +12,16 @@ pub struct CLI {
     pub output: std::path::PathBuf,
 }
 
-
-pub fn determine_indent(string: &str) -> usize {
-    let mut spaces = 0;
-    for x in string.chars() {
-        if x == ' ' {
-            spaces += 1;
-        } else {
-            break;
-        }
-    }
-    spaces
-}
 pub fn determine_indent_decl(string: &str) -> usize {
-    string.chars().take_while(|x| {*x == ' '}).count()
+    string.chars().take_while(|x| *x == ' ').count()
 }
 
 fn find_max_indent(lines: &str) -> usize {
-    let mut indents: Vec<usize> = Vec::new();
-    for line in lines.split('\n') {
-        indents.push(determine_indent(line));
-    }
-    indents.into_iter().max().unwrap()
+    lines
+        .split('\n')
+        .map(determine_indent_decl)
+        .max()
+        .expect("IDK what could ever go wrong here")
 }
 fn spaces(number: usize) -> String {
     " ".chars().cycle().take(number).collect()
@@ -43,7 +30,7 @@ fn generate_indents(lines: &str) -> Vec<Line> {
     let mut kv: Vec<Line> = Vec::new();
     for line in lines.split('\n') {
         kv.push(Line {
-            indent: determine_indent(line),
+            indent: determine_indent_decl(line),
             line: line.trim().to_string(),
         });
     }
@@ -59,3 +46,4 @@ pub fn generate_result(lines: &str) -> String {
     }
     res.into_iter().collect()
 }
+
