@@ -46,4 +46,3 @@ pub fn generate_result(lines: &str) -> String {
     }
     res.into_iter().collect()
 }
-
