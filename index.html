@@ -1,16 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Deindentor</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-	</head>
-	<body>
-		<script type="module">
-		import init, {greet} from "./pkg/deindentor.js";
+
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+	<title>Deindentor</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		body {
+			display: flex;
+			flex-direction: row;
+		}
+
+		textarea {
+			font-size: 1.3em;
+			font-family: 'jetbrains mono', monospace;
+			padding: 0.5em;
+		}
+	</style>
+</head>
+
+<body>
+	<textarea id="inp" rows="32" cols="72" placeholder="Code goes here"></textarea>
+	<textarea id="out" rows="32" cols="72" readonly></textarea>
+
+
+	<script type="module">
+		import init, { generate_result, greet } from "./pkg/deindentor.js";
 		init().then(() => {
-			greet("Hello");
+			const inpArea = document.querySelector("#inp");
+			const outArea = document.querySelector("#out");
+			setInterval(() => {
+				outArea.value = generate_result(inpArea.value);
+			}, 100);
 		});
-		</script>		
-	</body>
+	</script>
+</body>
+
 </html>
