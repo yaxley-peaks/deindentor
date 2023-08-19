@@ -1,4 +1,6 @@
 use clap::Parser;
+use wasm_bindgen::prelude::*;
+
 struct Line {
     indent: usize,
     line: String,
@@ -36,6 +38,7 @@ fn generate_indents(lines: &str) -> Vec<Line> {
     }
     kv
 }
+#[wasm_bindgen]
 pub fn generate_result(lines: &str) -> String {
     let max_indent = find_max_indent(lines);
     let indents = generate_indents(lines);
@@ -45,4 +48,13 @@ pub fn generate_result(lines: &str) -> String {
         res.push("\n".to_string());
     }
     res.into_iter().collect()
+}
+#[wasm_bindgen]
+extern "C" {
+    pub fn alert(s: &str);
+}
+
+#[wasm_bindgen]
+pub fn greet(name: &str) {
+    alert(&format!("Hello, {}", name));
 }

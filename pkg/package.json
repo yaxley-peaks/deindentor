@@ -1,0 +1,28 @@
+{
+  "name": "deindentor",
+  "collaborators": [
+    "yaxley-peaks <epiclycoolgaemer@gmail.com>"
+  ],
+  "description": "A tool to reverse indentation in a file.",
+  "version": "1.1.1",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yaxley-peaks/deindentor"
+  },
+  "files": [
+    "deindentor_bg.wasm",
+    "deindentor.js",
+    "deindentor.d.ts"
+  ],
+  "module": "deindentor.js",
+  "homepage": "https://github.com/yaxley-peaks/deindentor",
+  "types": "deindentor.d.ts",
+  "sideEffects": false,
+  "keywords": [
+    "cli",
+    "formatting",
+    "indentation",
+    "indent"
+  ]
+}
