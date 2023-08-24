@@ -4,12 +4,24 @@
 <head>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono&display=swap" rel="stylesheet">
 	<title>Deindentor</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
+		* {
+			background-color: #EEE;
+			color: #444;
+		}
 		body {
+			margin: 0%;
+		}
+		h1 {
+			font-family: inter, sans-serif;
+			text-align: center;
+		}
+
+		#main {
 			display: flex;
 			flex-direction: row;
 		}
@@ -23,19 +35,42 @@
 </head>
 
 <body>
-	<textarea id="inp" rows="32" cols="72" placeholder="Code goes here"></textarea>
-	<textarea id="out" rows="32" cols="72" readonly></textarea>
-
+	<h1>Indentation reverser</h1>
+	<div id="main">
+		<textarea id="inp" rows="30" cols="72" placeholder="Text goes here"></textarea>
+		<textarea id="out" rows="30" cols="72" readonly></textarea>
+	</div>
 
 	<script type="module">
 		import init, { generate_result, greet } from "./pkg/deindentor.js";
 		init().then(() => {
 			const inpArea = document.querySelector("#inp");
 			const outArea = document.querySelector("#out");
-			setInterval(() => {
+			inpArea.addEventListener("input", (e) => {
 				outArea.value = generate_result(inpArea.value);
-			}, 100);
+			});
 		});
+		document.querySelector("textarea").addEventListener('keydown',function(e) {
+			if (e.keyCode === 9) { // tab was pressed
+				// get caret position/selection
+				var start = this.selectionStart;
+				var end = this.selectionEnd;
+
+				var target = e.target;
+				var value = target.value;
+
+				// set textarea value to: text before caret + tab + text after caret
+				target.value = value.substring(0, start)
+					+ "       "
+					+ value.substring(end);
+
+				// put caret at right position again (add one for the tab)
+				this.selectionStart = this.selectionEnd = start + 1;
+
+				// prevent the focus lose
+				e.preventDefault();
+			}
+		}, false);
 	</script>
 </body>
 
